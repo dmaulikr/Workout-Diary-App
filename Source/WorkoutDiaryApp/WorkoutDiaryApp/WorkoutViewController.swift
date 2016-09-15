@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkoutViewController: UIViewController {
+class WorkoutViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -18,14 +18,45 @@ class WorkoutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Handle the text field's user input via delegate callbacks
+        nameTextField.delegate = self
+        
+        //Set up views if editing an existing Workout
+        if let workout = workout {
+            navigationItem.title = workout.name
+            nameTextField.text = workout.name
+        }
+        
+        // Enable the Save button only if the text field has a valid workout name.
+        checkValidWorkoutName()
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways
+        let isPresentingInAddWorkoutMode = self.presentingViewController is UINavigationController
+        
+        print(isPresentingInAddWorkoutMode)
+        
+        if isPresentingInAddWorkoutMode {
+        
+            dismiss(animated: true, completion: nil)
+        
+        }
+        else {
+        
+            navigationController!.popViewController(animated: true)
+            
+        }
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
     
         //Disable the Save button while editing.
         
-        saveButton.enabled = false
+        saveButton.isEnabled = false
     
     }
     
@@ -35,11 +66,24 @@ class WorkoutViewController: UIViewController {
         
         let text = nameTextField.text ?? ""
         
-        saveButton.enabled = !text.isEmpty
+        saveButton.isEnabled = !text.isEmpty
     
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+    
+        checkValidWorkoutName()
+        navigationItem.title = textField.text
+    
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if saveButton === sender {
         
             let name = nameTextField.text ?? ""

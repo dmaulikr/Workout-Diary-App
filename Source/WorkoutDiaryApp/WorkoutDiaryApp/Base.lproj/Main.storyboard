@@ -35,6 +35,7 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="sHR-1F-nEG" id="rsX-Fc-NfS"/>
                                     <outlet property="photoImageView" destination="gCj-Tz-Mru" id="FuB-8j-5AP"/>
+                                    <segue destination="9pv-A4-QxB" kind="show" identifier="ShowDetail" id="k46-Xi-E4W"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -86,7 +87,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Workout" id="eep-cx-pUo">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8hr-yO-dHh"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8hr-yO-dHh">
+                            <connections>
+                                <action selector="cancel:" destination="9pv-A4-QxB" id="AV4-KB-hOO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="lcT-AU-uX6">
                             <connections>
                                 <segue destination="SDh-KD-TqM" kind="unwind" unwindAction="unwindToWorkoutList:" id="fi9-Qt-raD"/>
@@ -198,11 +203,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ml5-WA-Ggf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2190" y="-566"/>
+            <point key="canvasLocation" x="2240" y="-74"/>
         </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="k46-Xi-E4W"/>
+    </inferredMetricsTieBreakers>
 </document>

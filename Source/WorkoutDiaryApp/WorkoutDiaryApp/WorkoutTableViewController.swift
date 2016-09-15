@@ -39,36 +39,61 @@ class WorkoutTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return workouts.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "DiaryTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! DiaryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DiaryTableViewCell
         
-        let workout = workouts[indexPath.row]
+        let workout = workouts[(indexPath as NSIndexPath).row]
         
         cell.nameLabel.text = workout.name
 
         return cell
     }
     
-    @IBAction func unwindToWorkoutList(sender: UIStoryboardSegue) {
-    
-        if let sourceViewController = sender.sourceViewController as? WorkoutViewController, workout = sourceViewController.workout {
-        
-            //Add a new workout
-            let newIndexPath = NSIndexPath(forItem: workouts.count, inSection: 0)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetail" {
             
-            workouts.append(workout)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+            let workoutDetailViewController = segue.destination as! WorkoutViewController
+            
+            if let selectedWorkoutCell = sender as? DiaryTableViewCell {
+                let indexPath = tableView.indexPath(for: selectedWorkoutCell)!
+                let selectedWorkout = workouts[(indexPath as NSIndexPath).row]
+                workoutDetailViewController.workout = selectedWorkout
+            }
+        }
+        else if segue.identifier == "AddItem"{
+            
+            print("Adding new workout")
+            
+        }
+    }
+    
+    @IBAction func unwindToWorkoutList(_ sender: UIStoryboardSegue) {
+    
+        if let sourceViewController = sender.source as? WorkoutViewController, let workout = sourceViewController.workout {
+            
+            if let selecedIndexPath = tableView.indexPathForSelectedRow {
+                
+                // Update an existing workout
+                workouts[(selecedIndexPath as NSIndexPath).row] = workout
+                tableView.reloadRows(at: [selecedIndexPath], with: .none)
+            }
+            else {
         
+                //Add a new workout
+                let newIndexPath = IndexPath(item: workouts.count, section: 0)
+                workouts.append(workout)
+                tableView.insertRows(at: [newIndexPath], with: .bottom)
+            }
         }
     }
 }

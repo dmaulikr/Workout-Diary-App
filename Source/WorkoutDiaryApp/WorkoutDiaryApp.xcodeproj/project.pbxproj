@@ -109,6 +109,7 @@
 					8322B90E1D76C0F0004F002F = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = JY47K9G273;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -273,6 +274,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alexander.Lindgren.WorkoutDiaryApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -287,6 +289,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Alexander.Lindgren.WorkoutDiaryApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
