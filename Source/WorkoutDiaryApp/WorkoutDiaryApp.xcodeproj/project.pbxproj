@@ -16,6 +16,7 @@
 		8322B9271D76C927004F002F /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8322B9261D76C927004F002F /* DiaryTableViewCell.swift */; };
 		8322B9291D76CE37004F002F /* WorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8322B9281D76CE37004F002F /* WorkoutTableViewController.swift */; };
 		8322B92D1D76E30B004F002F /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8322B92C1D76E30B004F002F /* Workout.swift */; };
+		832382851DA134E500E5A673 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832382841DA134E500E5A673 /* Exercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8322B9261D76C927004F002F /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		8322B9281D76CE37004F002F /* WorkoutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewController.swift; sourceTree = "<group>"; };
 		8322B92C1D76E30B004F002F /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		832382841DA134E500E5A673 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				8322B9181D76C0F0004F002F /* Main.storyboard */,
 				8322B9281D76CE37004F002F /* WorkoutTableViewController.swift */,
 				8322B92C1D76E30B004F002F /* Workout.swift */,
+				832382841DA134E500E5A673 /* Exercise.swift */,
 				8322B9261D76C927004F002F /* DiaryTableViewCell.swift */,
 				8322B91B1D76C0F0004F002F /* Assets.xcassets */,
 				8322B91D1D76C0F0004F002F /* LaunchScreen.storyboard */,
@@ -103,7 +106,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Alexander Lindgren";
 				TargetAttributes = {
 					8322B90E1D76C0F0004F002F = {
@@ -154,6 +157,7 @@
 				8322B9131D76C0F0004F002F /* AppDelegate.swift in Sources */,
 				8322B9151D76C0F0004F002F /* WorkoutViewController.swift in Sources */,
 				8322B9271D76C927004F002F /* DiaryTableViewCell.swift in Sources */,
+				832382851DA134E500E5A673 /* Exercise.swift in Sources */,
 				8322B92D1D76E30B004F002F /* Workout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,8 +198,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -239,8 +245,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -259,6 +267,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

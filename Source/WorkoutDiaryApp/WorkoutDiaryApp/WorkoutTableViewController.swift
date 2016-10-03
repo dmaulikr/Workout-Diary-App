@@ -16,18 +16,33 @@ class WorkoutTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Use the edit button item provided by the table view controller.
+        navigationItem.leftBarButtonItem = editButtonItem
 
-        loadSampleWorkouts()
+        // Load any saved meals, otherwise load sample data.
+        if let savedWorkouts = loadWorkouts() {
+            workouts += savedWorkouts
+        } else {
+            // Load the sample data.
+            loadSampleWorkouts()
+        }
         
     }
     
     func loadSampleWorkouts(){
         
-        let workout1 = Workout(name: "Legs")
-        let workout2 = Workout(name: "Chest")
-        let workout3 = Workout(name: "Abs")
+        let workout1 = Workout(name: "Legs", exercises: nil)
+        let workout2 = Workout(name: "Chest", exercises: nil)
+        let workout3 = Workout(name: "Abs", exercises: nil)
         
-        workouts += [workout1, workout2, workout3]
+        workout1!.addExercise(name: "ABS")
+        
+        
+        workouts.append(workout1!)
+        workouts.append(workout2!)
+        workouts.append(workout3!)
+        
         
         
     }
@@ -57,6 +72,31 @@ class WorkoutTableViewController: UITableViewController {
         cell.nameLabel.text = workout.name
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            // Delete the row from the data source
+            
+            workouts.remove(at: indexPath.row)
+            saveWorkouts()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+            
+            // Create new instance of workout, insert it into the array, add a new row to the table view
+            
+            
+            
+        }
+        
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -94,6 +134,27 @@ class WorkoutTableViewController: UITableViewController {
                 workouts.append(workout)
                 tableView.insertRows(at: [newIndexPath], with: .bottom)
             }
+            
+            // Save the workouts.
+            saveWorkouts()
         }
     }
+    
+    func saveWorkouts() {
+        
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(workouts, toFile: Workout.ArchiveURL.path)
+        
+        if !isSuccessfulSave {
+            
+            print("Failed to save workouts...")
+        }
+        
+    }
+    
+    func loadWorkouts() -> [Workout]? {
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Workout.ArchiveURL.path) as? [Workout]
+    }
+    
+    
 }

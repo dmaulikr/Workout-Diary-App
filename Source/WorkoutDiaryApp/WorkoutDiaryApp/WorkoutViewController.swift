@@ -34,20 +34,16 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
-        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways
-        let isPresentingInAddWorkoutMode = self.presentingViewController is UINavigationController
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
         
-        print(isPresentingInAddWorkoutMode)
+        dismiss(animated: true, completion: nil) //STRANGE!
         
-        if isPresentingInAddWorkoutMode {
         
+        if isPresentingInAddMealMode {
             dismiss(animated: true, completion: nil)
-        
-        }
-        else {
-        
+        } else {
             navigationController!.popViewController(animated: true)
-            
         }
         
     }
@@ -83,13 +79,17 @@ class WorkoutViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if saveButton === sender {
+        if saveButton === sender as! UIBarButtonItem! {
         
             let name = nameTextField.text ?? ""
             
             // Set the workout to be passed to WorkoutTableViewController after the unwind segue
-            workout = Workout(name: name)
+            workout = Workout(name: name, exercises: nil)
         
         }
     }
