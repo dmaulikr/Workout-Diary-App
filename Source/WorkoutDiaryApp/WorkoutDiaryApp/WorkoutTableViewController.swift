@@ -89,7 +89,6 @@ class WorkoutTableViewController: UITableViewController {
             // Create new instance of workout, insert it into the array, add a new row to the table view
             
             
-            
         }
         
     }
@@ -102,7 +101,7 @@ class WorkoutTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
             
-            let workoutDetailViewController = segue.destination as! WorkoutViewController
+            let workoutDetailViewController = segue.destination as! ExerciseTableViewController
             
             if let selectedWorkoutCell = sender as? DiaryTableViewCell {
                 let indexPath = tableView.indexPath(for: selectedWorkoutCell)!
